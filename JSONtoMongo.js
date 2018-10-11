@@ -11,12 +11,28 @@ var fs = require('fs'),
 
 /* Connect to your database using mongoose - remember to keep your key secret*/
 
+
+mongoose.connect(config.db.uri);
+
+
 /* 
   Instantiate a mongoose model for each listing object in the JSON file, 
   and then save it to your Mongo database 
 
   Remember that we need to read in a file like we did in Bootcamp Assignment #1.
  */
+
+
+var thelist = JSON.parse(fs.readFileSync('./listings.json', 'utf8'));
+
+for (var i = 0, length = thelist.entries.length; i < length; i++) {
+	var entry = new Listing(thelist.entries[i]);
+
+	entry.save(function(err)) {
+		if (err) throw err;
+	});
+}
+
 
 
 /*  
