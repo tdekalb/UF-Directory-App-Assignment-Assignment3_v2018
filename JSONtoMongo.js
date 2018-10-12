@@ -23,15 +23,12 @@ mongoose.connect(config.db.uri);
  */
 
 
-var thelist = JSON.parse(fs.readFileSync('./listings.json', 'utf8'));
+var thelist = require('./listings.json');
 
-for (var i = 0, length = thelist.entries.length; i < length; i++) {
-	var entry = new Listing(thelist.entries[i]);
+Listing.collection.insertMany(thelist.entries);
 
-	entry.save(function(err)) {
-		if (err) throw err;
-	});
-}
+
+
 
 
 

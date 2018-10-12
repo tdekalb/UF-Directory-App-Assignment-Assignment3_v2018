@@ -58,9 +58,10 @@ var retrieveAllListings = function() {
 
 	Listing.find({}, function(err, result) {
 		if (err) throw err;
-		console.log(result);
+		else console.log(result);
 
-};
+	});
+}
 
 findLibraryWest();
 removeCable();
